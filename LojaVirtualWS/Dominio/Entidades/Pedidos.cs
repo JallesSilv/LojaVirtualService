@@ -9,14 +9,18 @@ using System.Text;
 namespace Dominio.Entidades
 {
     [Table("Pedidos")]
-    public class Pedidos : Entidade
+    public class Pedidos
     {
         [Key]
         public int ChavePedido { get; set; }
 
         [ForeignKey("Pessoas")]
         public int ChavePessoa { get; set; }
-        //public Pessoas Pessoas { get; set; }
+        public virtual Pessoas Pessoas { get; set; }
+
+        [ForeignKey("FormaPagamento")]
+        public int ChaveFormaPagamento { get; set; }
+        public virtual FormaPagamento FormaPagamento { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
@@ -27,20 +31,8 @@ namespace Dominio.Entidades
         public int Quatidade { get; set; }
         public string TipoPagamento { get; set; }
         public int Parcela { get; set; }
-        public double Preco { get; set; }
         public double PrecoTotal { get; set; }
 
-        public int ChaveFormaPagamento { get; set; }
-        public FormaPagamento FormaPagamento { get; set; } 
-
-        public ICollection<ItemPedidos>  ItemPedidos { get; set; }
-
-        public override void Validate()
-        {
-            LimparMensagensValidacao();
-            if (!ItemPedidos.Any())
-                AdicionarCritica("Atenção: Nem um item foi selecionado!!!");
-        }
-        //public ICollection<Funcionario> ListFuncionario { get; set; }
+        public virtual ICollection<ItemPedidos> ItensPedido { get; set; }        
     }
 }

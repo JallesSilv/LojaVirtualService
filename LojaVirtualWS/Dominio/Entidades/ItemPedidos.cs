@@ -1,18 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.Entidades
 {
-    public class ItemPedidos : Entidade
+    [Table("itenspedidos")]
+    public class ItemPedidos
     {
-        public int ChaveItemPedido { get; set; }
-        public int ChaveProduto { get; set; }
-        public int Quantidade { get; set; }
+        [Key]
+        public int ChaveItensPedido { get; set; }
 
-        public override void Validate()
-        {
-            throw new NotImplementedException();
-        }
+        [ForeignKey("Pedidos")]
+        public int ChavePedido { get; set; }
+        public virtual Pedidos Pedidos { get; set; }
+
+        [ForeignKey("Produtos")]
+        public int ChaveProduto { get; set; }
+        public virtual Produtos Produtos { get; set; }
+
+        public int Quantidade { get; set; }      
     }
 }

@@ -15,7 +15,7 @@ namespace Service
     {
         public static void Main(string[] args)
         {
-            //CreateHostBuilder(args, XConfig.StateMode.asBool());
+            CreateHostBuilder(args, XConfig.StateMode.AsBool());
             //Console.ReadLine();
 
         }

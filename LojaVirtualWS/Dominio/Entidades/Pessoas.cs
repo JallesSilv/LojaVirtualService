@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Dominio.Entidades
 {
     [Table("Pessoas")]
-    public class Pessoas : Entidade
+    public class Pessoas
     {
         //public Pessoa()
         //{
@@ -21,7 +22,7 @@ namespace Dominio.Entidades
         [StringLength(100)]
         public string Email { get; set; }
         [StringLength(100)]
-        public string Senha { get; set; }
+        public string Senha { get; set; }        
         public string CpnjCpf { get; set; }
         public string Telefone { get; set; }
         [DataType(DataType.Date)]
@@ -33,11 +34,9 @@ namespace Dominio.Entidades
         public string Observacoes { get; set; }
         public bool Ativo { get; set; }
 
-        public ICollection<Pedidos> Pedido { get; set; }
+        //[NotMapped]
+        //public ICollection<Pedidos> Pedido { get; set; }
 
-        public override void Validate()
-        {
-            throw new NotImplementedException();
-        }
+        //public virtual ICollection<Pedidos> Pedidos { get; set; }
     }
 }

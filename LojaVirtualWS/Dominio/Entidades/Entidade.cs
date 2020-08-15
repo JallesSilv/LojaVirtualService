@@ -23,6 +23,11 @@ namespace Dominio.Entidades
             MensagensValidacao.Add(mensagens);
         }
 
+        public string ObterMensagensValidacao()
+        {
+            return string.Join(". ", MensagensValidacao);
+        }
+
         public abstract void Validate();
         protected bool EhValido
         {

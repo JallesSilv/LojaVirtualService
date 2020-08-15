@@ -1,0 +1,10 @@
+{
+  "Server": "127.0.0.1",
+  "DataSouce": "lojavirtual",
+  "UserID": "root",
+  "Password": "DevEngegraph",
+  "Porta": "3306",
+  "Uf": "GO",
+  //Modo true = Console ou false = Servico
+  "StateMode": "true"
+}

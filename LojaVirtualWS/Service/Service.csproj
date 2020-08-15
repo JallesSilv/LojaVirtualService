@@ -3,6 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>dotnet-Service-12491241-F768-4675-B7AC-CEA983EBCDFD</UserSecretsId>
+    <ApplicationIcon>appicon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\Binarios\Servidor\</OutputPath>
+    <Optimize>true</Optimize>
+    <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,5 +20,16 @@
   <ItemGroup>
     <ProjectReference Include="..\LojaVirtualWS\LojaVirtualWS.csproj" />
     <ProjectReference Include="..\Repositorio\Repositorio.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Desintalar.bat">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Instalar.bat">
+      <SubType>Code</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
