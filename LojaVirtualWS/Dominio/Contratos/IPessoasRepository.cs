@@ -7,7 +7,7 @@ namespace Dominio.Contratos
 {
     public interface IPessoasRepository : IBaseRepository<Pessoas>
     {
-         Pessoas Login(string pEmail, string pSenha);
-        Pessoas Login(string login);
+        Pessoas Login(string pEmail, string pSenha);
+        Pessoas VerificarUsuario(string pEmail);
     }
 }

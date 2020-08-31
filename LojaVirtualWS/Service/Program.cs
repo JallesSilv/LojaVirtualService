@@ -23,7 +23,8 @@ namespace Service
         public static void CreateHostBuilder(string[] args, bool console)
         {
             string _ip = XUtilitarios.GetLocalIPv4(NetworkInterfaceType.Ethernet, Dns.GetHostName());
-            string url = $"http://{_ip}:5001";
+            string url = $"http://0.0.0.0:5001";
+            //string url = $"http://{_ip}:5001";
             //string url = $"http://localhost:5001";
 
             var pathToExe = Process.GetCurrentProcess().MainModule.FileName;

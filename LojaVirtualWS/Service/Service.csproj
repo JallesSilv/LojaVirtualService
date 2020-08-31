@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Worker">
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -8,7 +8,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\..\Binarios\Servidor\</OutputPath>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
     <PlatformTarget>AnyCPU</PlatformTarget>
   </PropertyGroup>
 

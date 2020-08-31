@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Dominio.Contratos;
@@ -66,6 +67,11 @@ namespace LojaVirtualWS.Controllers
         {
             try
             {
+                var usuarioAtivo = _contexto.VerificarUsuario(pessoa.Email);
+                if (usuarioAtivo.Email != null)
+                {
+                    return BadRequest("Usuário já cadastrado!!");
+                }
                 _contexto.Adicionar(pessoa);
                 return Created("api/pessoas", pessoa);
             }
@@ -73,8 +79,6 @@ namespace LojaVirtualWS.Controllers
             {
                 return BadRequest($"Erro: {ex.ToString()}");
             }
-
-            return BadRequest();
         }
 
         /// <summary>

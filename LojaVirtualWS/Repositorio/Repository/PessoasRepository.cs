@@ -22,16 +22,24 @@ namespace Repositorio.Repository
             {
                 return _contexto.Pessoas.FirstOrDefault(pX=> pX.Email == pEmail && pX.Senha == pSenha);
             }
-            catch (Exception error)
+            catch (Exception eX)
             {
 
-                throw new Exception($@"{error.Message}");
+                throw new Exception($@"{eX.Message}");
             }
         }
-        
-        public Pessoas Login(string pEmail)
+
+        public Pessoas VerificarUsuario(string pEmail)
         {
-            return _contexto.Pessoas.FirstOrDefault(pX=>pX.Email == pEmail);
+            try
+            {
+               return _contexto.Pessoas.FirstOrDefault(pX => pX.Email == pEmail);
+            }
+            catch (Exception eX)
+            {
+
+                throw new Exception($@"{eX.Message}");
+            }
         }
 
     }

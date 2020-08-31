@@ -53,9 +53,9 @@ namespace LojaVirtualWS
             services.AddScoped<IPedidosRepository, PedidosRepository>();
 
 
-            services.AddTransient<MVersao_Migration>();
-            services.AddTransient<MPessoas>();
-            services.AddTransient<MProdutos>();            
+            //services.AddTransient<MVersao_Migration>();
+            //services.AddTransient<MPessoas>();
+            //services.AddTransient<MProdutos>();            
 
             services.AddControllers()
                     .AddNewtonsoftJson(opt =>
@@ -74,7 +74,7 @@ namespace LojaVirtualWS
             services.AddSwaggerGen(wag =>
             {
 
-                wag.SwaggerDoc("v1", new OpenApiInfo { Title = "Sistema Finaceiro", Version = VersaoApi.VersaoWeb });
+                wag.SwaggerDoc("v1", new OpenApiInfo { Title = "Api Loja Virtual", Version = VersaoApi.VersaoWeb });
             });
         }
 
@@ -110,13 +110,13 @@ namespace LojaVirtualWS
             app.UseHttpsRedirection();
             app.UseRouting();
 
-            var serviceProv = app.ApplicationServices;
-            var mVersao_Migration = serviceProv.GetService<MVersao_Migration>();
-            mVersao_Migration.Executar();
-            var mPessoas = serviceProv.GetService<MPessoas>();
-            mPessoas.Executar();
-            var mProdutos = serviceProv.GetService<MProdutos>();
-            mProdutos.Executar();
+            //var serviceProv = app.ApplicationServices;
+            //var mVersao_Migration = serviceProv.GetService<MVersao_Migration>();
+            //mVersao_Migration.Executar();
+            //var mPessoas = serviceProv.GetService<MPessoas>();
+            //mPessoas.Executar();
+            //var mProdutos = serviceProv.GetService<MProdutos>();
+            //mProdutos.Executar();
 
             //app.UseAuthorization();
 
