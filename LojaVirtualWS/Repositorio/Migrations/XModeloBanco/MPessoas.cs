@@ -9,57 +9,44 @@ using System.Text;
 
 namespace Repositorio.Migrations.XModeloBanco
 {
-    public class MPessoas : XMigration
+    public class MPessoas : XMigrationBanco
     {
-        public MPessoas(LojaVirtualDbContext contexto) : base(contexto) { }
 
-        public override void Executar()
+        public static void Pessoas()
         {
             CriarTabelaSql();
         }
 
-        public void CriarTabelaSql()
+        private static void CriarTabelaSql()
         {
-            if (!VerificarExisteTabela.ExisteColunaNaTabela("pessoas", "ChavePessoa"))
+            if (!VerificarExisteTabela.ExisteColunaNaTabela("Pessoas", "ChavePessoa"))
             {
                 using (var cmd = FactoryConnection.NewCommand())
                 {
                     try
                     {
-                        cmd.CommandText = @"CREATE TABLE `pessoas` (
-                                              `ChavePessoa` int NOT NULL AUTO_INCREMENT,
+                        cmd.CommandText = @"CREATE TABLE `Pessoas` (
+                                              `ChavePessoa` BIGINT NOT NULL AUTO_INCREMENT,
                                               `Nome` varchar(100) DEFAULT NULL,
                                               `Email` varchar(100) DEFAULT NULL,
                                               `Senha` varchar(100) DEFAULT NULL,
-                                              `CpnjCpf` varchar(14) DEFAULT NULL,
+                                              `CnpjCpf` varchar(14) DEFAULT NULL,                                              
                                               `Telefone` varchar(20) DEFAULT NULL,
                                               `DataCadastro` datetime NOT NULL,
+                                              `Cep` varchar(8) DEFAULT NULL,
                                               `Endereco` varchar(500) DEFAULT NULL,
                                               `Observacoes` varchar(1000) DEFAULT NULL,
                                               `Ativo` bit(1) NOT NULL,
                                             PRIMARY KEY (`ChavePessoa`))";
                         cmd.ExecuteNonQuery();
-
+                        XLog.RegistraLog($"Tabela Pessoas.", "ModeloBanco");
                     }
                     catch (Exception error)
                     {
                         throw new Exception($"Error Tabela Pessoas: {error.Message}");
                     }
                 }
-            }
-            var M02 = _contexto.Versao_Migration.FirstOrDefault(px => px.Versao == 2);
-            if (M02 is null)
-            {
-                try
-                {
-                    _contexto.Versao_Migration.Add(new Versao_Migration { Data = DateTime.Now, Versao = 2 });
-                    _contexto.SaveChanges();
-                }
-                catch (Exception eX)
-                {
-                    throw new Exception($"Error 'Migration Pessoas': {eX.Message}");
-                }
-            }
+            }            
         }
     }
 }

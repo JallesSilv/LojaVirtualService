@@ -53,9 +53,7 @@ namespace LojaVirtualWS
             services.AddScoped<IPedidosRepository, PedidosRepository>();
 
 
-            //services.AddTransient<MVersao_Migration>();
-            //services.AddTransient<MPessoas>();
-            //services.AddTransient<MProdutos>();            
+            services.AddTransient<RodarMigration>();   
 
             services.AddControllers()
                     .AddNewtonsoftJson(opt =>
@@ -110,13 +108,10 @@ namespace LojaVirtualWS
             app.UseHttpsRedirection();
             app.UseRouting();
 
-            //var serviceProv = app.ApplicationServices;
-            //var mVersao_Migration = serviceProv.GetService<MVersao_Migration>();
-            //mVersao_Migration.Executar();
-            //var mPessoas = serviceProv.GetService<MPessoas>();
-            //mPessoas.Executar();
-            //var mProdutos = serviceProv.GetService<MProdutos>();
-            //mProdutos.Executar();
+            //Migration
+            var serviceProv = app.ApplicationServices;
+            var rodarMigration = serviceProv.GetService<RodarMigration>();
+            rodarMigration.Executar();
 
             //app.UseAuthorization();
 

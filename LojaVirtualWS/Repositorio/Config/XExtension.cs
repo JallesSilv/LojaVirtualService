@@ -22,7 +22,7 @@ namespace Repositorio.Config
             return Convert.ToBoolean(pValor);
         }
 
-        public static int AsInt32(this object pValor)
+        public static int AsInt64(this object pValor)
         {
             return Convert.ToInt32(pValor);
         }

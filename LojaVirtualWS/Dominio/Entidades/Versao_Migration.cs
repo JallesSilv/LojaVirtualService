@@ -8,7 +8,7 @@ namespace Dominio.Entidades
     public class Versao_Migration
     {
         [Key]
-        public int ChaveVersao { get; set; }
+        public Int64 ChaveVersao { get; set; }
         public DateTime Data { get; set; }
         public int Versao { get; set; }
     }

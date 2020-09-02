@@ -9,51 +9,37 @@ using System.Text;
 
 namespace Repositorio.Migrations.XModeloBanco
 {
-    public class MProdutos : XMigration
+    public class MProdutos : XMigrationBanco
     {
-        public MProdutos(LojaVirtualDbContext contexto) : base(contexto) { }
 
-        public override void Executar()
+        public static void Produtos()
         {
             CriarTabelaSql();
         }
         
-        public void CriarTabelaSql()
+        private static void CriarTabelaSql()
         {
-            if (!VerificarExisteTabela.ExisteColunaNaTabela("produtos", "ChaveProduto"))
+            if (!VerificarExisteTabela.ExisteColunaNaTabela("Produtos", "ChaveProduto"))
             {
                 using (var cmd = FactoryConnection.NewCommand())
                 {
                     try
                     {
-                        cmd.CommandText = @"CREATE TABLE `produtos` (
-                                              `ChaveProduto` int NOT NULL AUTO_INCREMENT,
+                        cmd.CommandText = @"CREATE TABLE `Produtos` (
+                                              `ChaveProduto` BIGINT NOT NULL AUTO_INCREMENT,
                                               `Nome` varchar(300) DEFAULT NULL,  
                                               `Descricao` varchar(300) DEFAULT NULL,
                                               `Preco` double DEFAULT NULL,
                                             PRIMARY KEY (`ChaveProduto`))";
                         cmd.ExecuteNonQuery();
-
+                        XLog.RegistraLog($"Tabela Produtos.", "ModeloBanco");
                     }
                     catch (Exception error)
                     {
                         throw new Exception($"Error Tabela Produtos: {error.Message}");
                     }
                 }
-            }
-            var M03 = _contexto.Versao_Migration.FirstOrDefault(px => px.Versao == 3);
-            if (M03 is null)
-            {
-                try
-                {
-                    _contexto.Versao_Migration.Add(new Versao_Migration { Data = DateTime.Now, Versao = 3 });
-                    _contexto.SaveChanges();
-                }
-                catch (Exception eX)
-                {
-                    throw new Exception($"Error 'Migration Produtos': {eX.Message}");
-                }
-            }
+            }            
         }
     }
 }

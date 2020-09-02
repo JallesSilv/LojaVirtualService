@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.Entidades
@@ -7,16 +8,16 @@ namespace Dominio.Entidades
     public class ItemPedidos
     {
         [Key]
-        public int ChaveItensPedido { get; set; }
+        public Int64 ChaveItensPedido { get; set; }
 
         [ForeignKey("Pedidos")]
-        public int ChavePedido { get; set; }
+        public Int64 ChavePedido { get; set; }
         public virtual Pedidos Pedidos { get; set; }
 
         [ForeignKey("Produtos")]
-        public int ChaveProduto { get; set; }
+        public Int64 ChaveProduto { get; set; }
         public virtual Produtos Produtos { get; set; }
 
-        public int Quantidade { get; set; }      
+        public Int64 Quantidade { get; set; }      
     }
 }

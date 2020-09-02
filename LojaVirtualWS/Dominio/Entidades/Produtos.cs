@@ -10,7 +10,7 @@ namespace Dominio.Entidades
     public class Produtos
     {
         [Key]
-        public int ChaveProduto { get; set; }
+        public Int64 ChaveProduto { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public decimal Preco { get; set; }       

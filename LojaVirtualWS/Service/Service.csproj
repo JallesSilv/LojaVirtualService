@@ -10,6 +10,7 @@
     <OutputPath>..\..\Binarios\Servidor\</OutputPath>
     <Optimize>false</Optimize>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
   </PropertyGroup>
 
   <ItemGroup>

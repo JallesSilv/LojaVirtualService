@@ -7,11 +7,11 @@ namespace Repositorio.Migrations.Base
 {
     public abstract class XMigration
     {
-        protected LojaVirtualDbContext _contexto;
-        public XMigration(LojaVirtualDbContext contexto)
-        {
-            _contexto = contexto;
-        }
+        //protected LojaVirtualDbContext _contexto;
+        //public XMigration(LojaVirtualDbContext contexto)
+        //{
+        //    _contexto = contexto;
+        //}
 
         public abstract void Executar();
 

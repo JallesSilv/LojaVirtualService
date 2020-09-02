@@ -16,14 +16,15 @@ namespace Dominio.Entidades
         //}
 
         [Key]
-        public int ChavePessoa { get; set; }
+        public Int64 ChavePessoa { get; set; }
         [StringLength(100)]
         public string Nome { get; set; }
         [StringLength(100)]
         public string Email { get; set; }
         [StringLength(100)]
         public string Senha { get; set; }        
-        public string CpnjCpf { get; set; }
+        public string CnpjCpf { get; set; }
+        public string Cep { get; set; }
         public string Telefone { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]

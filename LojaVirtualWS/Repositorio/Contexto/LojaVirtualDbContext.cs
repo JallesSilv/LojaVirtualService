@@ -1,9 +1,5 @@
 ﻿using Dominio.Entidades;
-using Dominio.ObjetoDeValor;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Repositorio.Contexto
 {
