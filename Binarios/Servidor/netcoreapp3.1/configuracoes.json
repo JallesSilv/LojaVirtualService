@@ -2,7 +2,7 @@
   "Server": "127.0.0.1",
   "DataSouce": "lojavirtual",
   "UserID": "root",
-  "Password": "DevEngegraph",
+  "Password": "#super#",
   "Porta": "3306",
   "Uf": "GO",
   //Modo true = Console ou false = Servico

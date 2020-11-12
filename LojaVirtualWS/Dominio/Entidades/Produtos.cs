@@ -13,6 +13,7 @@ namespace Dominio.Entidades
         public Int64 ChaveProduto { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
-        public decimal Preco { get; set; }       
+        public decimal Preco { get; set; }
+        public byte NomeImagem{ get; set; }
     }
 }

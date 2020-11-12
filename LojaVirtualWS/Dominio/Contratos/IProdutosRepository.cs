@@ -7,6 +7,6 @@ namespace Dominio.Contratos
 {
     public interface IProdutosRepository : IBaseRepository<Produtos>
     {
-
+        //void AdicionarProdutosImagem();
     }
 }

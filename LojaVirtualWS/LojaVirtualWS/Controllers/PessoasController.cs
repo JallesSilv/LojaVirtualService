@@ -55,6 +55,36 @@ namespace LojaVirtualWS.Controllers
 
         /// <summary>
         /// 
+        /// </summary>
+        /// <param name="pToken"></param>
+        /// <returns></returns>
+        /// <response code="200">Retorno Ok</response>
+        /// <response code="404">Item Null</response>  
+        [EnableCors("AlowsCors")]
+        //[ApiVersion("1.0")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [HttpGet("GetId")]
+        public ActionResult GetChave(int pChave)
+        {
+            try
+            {
+                return Ok(_contexto.ObterChave(pChave));
+                //if (listaPessoas == null)
+                //{
+                //    return NotFound($@"Erro ao carregar: {listaPessoas} ");
+                //}
+                //return Ok(listaPessoas.ToList());
+            }
+            catch (Exception error)
+            {
+
+                return BadRequest($@"Erro: {error.ToString()} ");
+            }
+        }
+
+        /// <summary>
+        /// 
         /// </summary>        
         /// <param name="pessoa"></param>
         /// <returns></returns>
@@ -68,16 +98,51 @@ namespace LojaVirtualWS.Controllers
             try
             {
                 var usuarioAtivo = _contexto.VerificarUsuario(pessoa.Email);
-                if (usuarioAtivo.Email != null)
+                if (usuarioAtivo != null)
                 {
                     return BadRequest("Usuário já cadastrado!!");
                 }
-                _contexto.Adicionar(pessoa);
-                return Created("api/pessoas", pessoa);
+                else
+                {
+                    _contexto.Adicionar(pessoa);
+                    return Created("api/pessoas", pessoa);
+                }
             }
             catch (Exception ex)
             {
-                return BadRequest($"Erro: {ex.ToString()}");
+                return BadRequest($"Erro: {ex.Message}");
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>        
+        /// <param name="pessoa"></param>
+        /// <returns></returns>
+        [EnableCors("AlowsCors")]
+        //[ApiVersion("1.0")]
+        [HttpPut]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public IActionResult Put([FromBody] Pessoas pessoa)
+        {
+            try
+            {
+                var usuarioAtivo = _contexto.VerificarUsuario(pessoa.Email);
+                if (usuarioAtivo != null)
+                {
+                    pessoa.ChavePessoa = usuarioAtivo.ChavePessoa;
+                    _contexto.Atualizar(pessoa);
+                    return BadRequest("Usuário atualizado com sucesso!!");
+                }
+                else
+                {                    
+                    return Created("api/pessoas", pessoa);
+                }
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro: {ex.Message}");
             }
         }
 

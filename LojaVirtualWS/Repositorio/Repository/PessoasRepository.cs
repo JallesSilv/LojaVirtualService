@@ -42,5 +42,19 @@ namespace Repositorio.Repository
             }
         }
 
+        public Pessoas ObterChave(int pChave)
+        {
+            try
+            {
+                var result = _contexto.Pessoas.Where(pX=>pX.ChavePessoa == pChave);
+                return result.FirstOrDefault();
+            }
+            catch (Exception error)
+            {
+
+                throw new Exception($@"{error.Message}");
+            }
+        }
+
     }
 }

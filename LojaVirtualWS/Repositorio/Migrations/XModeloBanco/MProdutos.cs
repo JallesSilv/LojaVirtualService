@@ -29,6 +29,7 @@ namespace Repositorio.Migrations.XModeloBanco
                                               `ChaveProduto` BIGINT NOT NULL AUTO_INCREMENT,
                                               `Nome` varchar(300) DEFAULT NULL,  
                                               `Descricao` varchar(300) DEFAULT NULL,
+                                              `NomeImagem` varchar(300) DEFAULT NULL,
                                               `Preco` double DEFAULT NULL,
                                             PRIMARY KEY (`ChaveProduto`))";
                         cmd.ExecuteNonQuery();

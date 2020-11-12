@@ -1,23 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Castle.Components.DictionaryAdapter;
 using Dominio.Contratos;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Repositorio.Config;
 using Repositorio.Contexto;
 using Repositorio.Migrations.Base;
-using Repositorio.Migrations.XModeloBanco;
 using Repositorio.Repository;
 
 namespace LojaVirtualWS
@@ -26,6 +19,9 @@ namespace LojaVirtualWS
     {
         public Startup(IConfiguration configuration)
         {
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("configuracoes.json", optional: false, reloadOnChange: true);
+
             Configuration = configuration;
         }
 
@@ -41,6 +37,7 @@ namespace LojaVirtualWS
                 option.EnableEndpointRouting = false;
             }).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             var conn = FactoryConnection.connection;
             services.AddControllers();
 
@@ -53,14 +50,15 @@ namespace LojaVirtualWS
             services.AddScoped<IPedidosRepository, PedidosRepository>();
 
 
-            services.AddTransient<RodarMigration>();   
+            services.AddTransient<RodarMigration>();
+
+            services.AddControllers().AddNewtonsoftJson();
 
             services.AddControllers()
                     .AddNewtonsoftJson(opt =>
                         opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             services.AddCors(c =>
-
             {
                 c.AddPolicy("AlowsCors", options => {
                     options.AllowAnyOrigin()
@@ -106,6 +104,7 @@ namespace LojaVirtualWS
             app.UseCors(options => options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             app.UseHttpsRedirection();
+            app.UseStaticFiles();
             app.UseRouting();
 
             //Migration
