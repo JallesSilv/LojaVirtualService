@@ -12,6 +12,7 @@ namespace Dominio.ObjetoDeValor
     {
         [Key]
         public int ChaveFormaPagamento { get; set; }
+        public int TipoFormaPagamento { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
 
@@ -19,14 +20,14 @@ namespace Dominio.ObjetoDeValor
         {
             get
             {
-                return ChaveFormaPagamento == (int)TipoFormaPagamentoEnum.Boleto;
+                return TipoFormaPagamento == (int)TipoFormaPagamentoEnum.Boleto;
             }
         }
         public bool EhCartaoCredito
         {
             get
             {
-                return ChaveFormaPagamento == (int)TipoFormaPagamentoEnum.CartaoCredito;
+                return TipoFormaPagamento == (int)TipoFormaPagamentoEnum.CartaoCredito;
             }
         }
         
@@ -34,7 +35,7 @@ namespace Dominio.ObjetoDeValor
         {
             get
             {
-                return ChaveFormaPagamento == (int)TipoFormaPagamentoEnum.Promissora;
+                return TipoFormaPagamento == (int)TipoFormaPagamentoEnum.Promissora;
             }
         }
         
@@ -42,7 +43,7 @@ namespace Dominio.ObjetoDeValor
         {
             get
             {
-                return ChaveFormaPagamento == (int)TipoFormaPagamentoEnum.NaoDefinido;
+                return TipoFormaPagamento == (int)TipoFormaPagamentoEnum.NaoDefinido;
             }
         }
     }

@@ -66,6 +66,8 @@ namespace LojaVirtualWS.Controllers
         {
             try
             {
+                if (produto.Nome == null)
+                    return BadRequest();
                 _contexto.Adicionar(produto);
                 return Created("api/produtos", produto);
             }
@@ -75,105 +77,131 @@ namespace LojaVirtualWS.Controllers
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>        
-        /// <param name="produto"></param>
-        /// <returns></returns>
-        [EnableCors("AlowsCors")]
-        //[ApiVersion("1.0")]
-        [HttpPost("EnviarArquivo")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult EnviarArquivo()
-        {
-            try
-            {
-                var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["arquivoEnviado"];
-                var nomeArquivo = formFile.FileName;
-                var extensao = nomeArquivo.Split(".").Last();
-                string novoNomeArquivo = GerarNovoNomeAruivo(nomeArquivo, extensao);
-                //var pastaArquivos = _hostEnvironment.WebRootFileProvider + "\\arquivos\\";
-                var pastaArquivos = "D:\\ExcluirImagem\\";
-                var nomeCompleto = pastaArquivos + novoNomeArquivo;
+        ///// <summary>
+        ///// 
+        ///// </summary>        
+        ///// <param name="produto"></param>
+        ///// <returns></returns>
+        //[EnableCors("AlowsCors")]
+        ////[ApiVersion("1.0")]
+        //[HttpPost("EnviarArquivo")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //public IActionResult Upload([FromBody]FileToUpload theFile)
+        //{
+        //    try
+        //    {
+        //        _contexto.AdicionarFile(theFile);
+        //    }
+        //    catch (Exception error)
+        //    {
 
-                using (var streamArquivo = new FileStream(nomeCompleto, FileMode.Create))
-                {
-                    formFile.CopyTo(streamArquivo);
-                }
+        //        throw new Exception($"erro sobre o arquivo");
+        //    }
+        //    return Ok();
+        //}
 
-                return Ok(novoNomeArquivo);
-            }
-            catch (Exception eX)
-            {
-                return BadRequest(eX.Message);
-            }
-        }
+        ///// <summary>
+        ///// 
+        ///// </summary>        
+        ///// <param name="produto"></param>
+        ///// <returns></returns>
+        //[EnableCors("AlowsCors")]
+        ////[ApiVersion("1.0")]
+        //[HttpPost("EnviarArquivo")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //public IActionResult EnviarArquivo(byte[] file)
+        //{
+        //    try
+        //    {
+        //        var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["arquivoEnviado"];
+        //        var nomeArquivo = formFile.FileName;
+        //        var extensao = nomeArquivo.Split(".").Last();
+        //        string novoNomeArquivo = GerarNovoNomeAruivo(nomeArquivo, extensao);
+        //        //var pastaArquivos = _hostEnvironment.WebRootFileProvider + "\\arquivos\\";
+        //        var pastaArquivos = "D:\\ExcluirImagem\\";
+        //        var nomeCompleto = pastaArquivos + novoNomeArquivo;
 
-        /// <summary>
-        /// 
-        /// </summary>        
-        /// <param name="produto"></param>
-        /// <returns></returns>
-        [EnableCors("AlowsCors")]
-        //[ApiVersion("1.0")]
-        [HttpPost("ConverteImagem")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult ConverteImagem()
-        {
-            try
-            {
-                var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["arquivoEnviado"];                
-                var nomeArquivo = BityImagem(formFile.FileName);
+        //        using (var streamArquivo = new FileStream(nomeCompleto, FileMode.Create))
+        //        {
+        //            formFile.CopyTo(streamArquivo);
+        //        }
 
-                var t = nomeArquivo;
+        //        return Ok(novoNomeArquivo);
+        //    }
+        //    catch (Exception eX)
+        //    {
+        //        return BadRequest(eX.Message);
+        //    }
+        //}
 
-                //var extensao = nomeArquivo.Split(".").Last();
-                //string novoNomeArquivo = GerarNovoNomeAruivo(nomeArquivo, extensao);
-                ////var pastaArquivos = _hostEnvironment.WebRootFileProvider + "\\arquivos\\";
-                //var pastaArquivos = "D:\\ExcluirImagem\\";
-                //var nomeCompleto = pastaArquivos + novoNomeArquivo;
+       
 
-                //using (var streamArquivo = new FileStream(nomeCompleto, FileMode.Create))
-                //{
-                //    formFile.CopyTo(streamArquivo);
-                //}
+        ///// <summary>
+        ///// 
+        ///// </summary>        
+        ///// <param name="produto"></param>
+        ///// <returns></returns>
+        //[EnableCors("AlowsCors")]
+        ////[ApiVersion("1.0")]
+        //[HttpPost("ConverteImagem")]
+        //[ProducesResponseType(StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status404NotFound)]
+        //public IActionResult ConverteImagem()
+        //{
+        //    try
+        //    {
+        //        var formFile = _httpContextAccessor.HttpContext.Request.Form.Files["arquivoEnviado"];                
+        //        var nomeArquivo = BityImagem(formFile.FileName);
 
-                return Ok(nomeArquivo);
-            }
-            catch (Exception eX)
-            {
-                return BadRequest(eX.Message);
-            }
-        }
+        //        var t = nomeArquivo;
 
-        private object BityImagem(string fileName)
-        {
-            try
-            {
-                var teste = Convert.ToByte(fileName);
-                return teste;
+        //        //var extensao = nomeArquivo.Split(".").Last();
+        //        //string novoNomeArquivo = GerarNovoNomeAruivo(nomeArquivo, extensao);
+        //        ////var pastaArquivos = _hostEnvironment.WebRootFileProvider + "\\arquivos\\";
+        //        //var pastaArquivos = "D:\\ExcluirImagem\\";
+        //        //var nomeCompleto = pastaArquivos + novoNomeArquivo;
 
-            }
-            catch (Exception eX)
-            {
+        //        //using (var streamArquivo = new FileStream(nomeCompleto, FileMode.Create))
+        //        //{
+        //        //    formFile.CopyTo(streamArquivo);
+        //        //}
 
-                throw new Exception(eX.Message);
-            }
-        }
+        //        return Ok(nomeArquivo);
+        //    }
+        //    catch (Exception eX)
+        //    {
+        //        return BadRequest(eX.Message);
+        //    }
+        //}
+
+        //private object BityImagem(string fileName)
+        //{
+        //    try
+        //    {
+        //        var teste = Convert.ToByte(fileName);
+        //        return teste;
+
+        //    }
+        //    catch (Exception eX)
+        //    {
+
+        //        throw new Exception(eX.Message);
+        //    }
+        //}
         //private byte BityImagem(byte nomeImagem)
         //{
         //    var imagem = Convert.ToByte(nomeImagem);
         //    return imagem;
         //}
 
-        private static string GerarNovoNomeAruivo(string nomeArquivo, string extensao)
-        {
-            var arrayNomeCompacto = Path.GetFileNameWithoutExtension(nomeArquivo).Take(10).ToArray();
-            var novoNomeArquivo = new string(arrayNomeCompacto).Replace(" ","-");
-            nomeArquivo = $"{novoNomeArquivo}_{DateTime.Now.ToString("yyyyMMddHHmm")}.{extensao}";
-            return nomeArquivo;
-        }
+        //private static string GerarNovoNomeAruivo(string nomeArquivo, string extensao)
+        //{
+        //    var arrayNomeCompacto = Path.GetFileNameWithoutExtension(nomeArquivo).Take(10).ToArray();
+        //    var novoNomeArquivo = new string(arrayNomeCompacto).Replace(" ","-");
+        //    nomeArquivo = $"{novoNomeArquivo}_{DateTime.Now.ToString("yyyyMMddHHmm")}.{extensao}";
+        //    return nomeArquivo;
+        //}
     }
 }

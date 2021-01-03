@@ -14,5 +14,12 @@ namespace Repositorio.Config
             else
                 return Convert.ToInt64(pValor).ToString(@"00\.000\.000\/0000\-00"); //CNPJ
         }
+
+        public static object AsFormatValor(object pValor)
+        {
+            if (pValor is null) return string.Empty;
+            
+            return Convert.ToDouble(pValor).ToString(@"C");
+        }
     }
 }

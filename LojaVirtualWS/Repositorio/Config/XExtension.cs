@@ -12,6 +12,24 @@ namespace Repositorio.Config
             return Convert.ToString(pValor);
         }
 
+        public static decimal AsDecimal(this string pValor)
+        {
+            if (pValor is null) return 0;
+            return Convert.ToDecimal(pValor.Replace(".", ","));
+        }
+
+        public static double AsDouble(this object pValor)
+        {
+            if (pValor is null) return 0;
+            return Convert.ToDouble(pValor);
+        }
+        
+        public static DateTime AsDateTime(this object pValor)
+        {
+            if (pValor is null) return DateTime.Now.Date;
+            return Convert.ToDateTime(pValor);
+        }
+
         public static bool EstaVazio(this string pValor)
         {
             return string.IsNullOrEmpty(pValor);

@@ -9,35 +9,35 @@ using System.Text;
 
 namespace Repositorio.Migrations.XModeloBanco
 {
-    public class MItensPedidos : XMigrationBanco
+    public class MPedidosItens : XMigrationBanco
     {
 
-        public static void ItensPedidos()
+        public static void PedidosItens()
         {
             CriarTabelaSql();
         }
 
         private static void CriarTabelaSql()
         {
-            if (!VerificarExisteTabela.ExisteColunaNaTabela("ItensPedidos", "ChaveItensPedido"))
+            if (!VerificarExisteTabela.ExisteColunaNaTabela("PedidosItens", "ChavePedidoItem"))
             {
                 using (var cmd = FactoryConnection.NewCommand())
                 {
                     try
                     {
-                        cmd.CommandText = @"CREATE TABLE `ItensPedidos` (
-                                              `ChaveItensPedido` BIGINT NOT NULL AUTO_INCREMENT,
+                        cmd.CommandText = @"CREATE TABLE `PedidosItens` (
+                                              `ChavePedidoItem` BIGINT NOT NULL AUTO_INCREMENT,
                                               `ChavePedido` BIGINT NOT NULL,
-                                              `ChaveProduto` BIGINT NOT NULL,
+                                              `ChaveProduto` BIGINT DEFAULT NULL,
                                               `Nome` varchar(300) DEFAULT NULL,  
                                               `Quatidade` BIGINT NULL,
-                                            PRIMARY KEY (`ChaveItensPedido`))";
+                                            PRIMARY KEY (`ChavePedidoItem`))";
                         cmd.ExecuteNonQuery();
-                        XLog.RegistraLog($"Tabela ItensPedidos.", "ModeloBanco");
+                        XLog.RegistraLog($"Tabela PedidosItens.", "ModeloBanco");
                     }
                     catch (Exception error)
                     {
-                        throw new Exception($"Error Tabela Itenspedidos: {error.Message}");
+                        throw new Exception($"Error Tabela PedidosItens: {error.Message}");
                     }
                 }
             }

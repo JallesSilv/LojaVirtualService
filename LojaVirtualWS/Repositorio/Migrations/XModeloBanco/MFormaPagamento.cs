@@ -23,7 +23,10 @@ namespace Repositorio.Migrations.XModeloBanco
                     {
                         cmd.CommandText = @"CREATE TABLE `FormaPagamento` (
                                             `ChaveFormaPagamento` BIGINT NOT NULL AUTO_INCREMENT,
-                                            `Descricao` varchar(300) DEFAULT NULL,
+                                            `Tipo` varchar(200) DEFAULT NULL,
+                                            `Categoria` varchar(100) DEFAULT NULL,
+                                            `Descricao` varchar(100) DEFAULT NULL,
+                                            `Ativo` BOOLEAN DEFAULT NULL,
                                             PRIMARY KEY (`ChaveFormaPagamento`))";
                         cmd.ExecuteNonQuery();
                         XLog.RegistraLog($"Tabela FormaPagamento.", "ModeloBanco");

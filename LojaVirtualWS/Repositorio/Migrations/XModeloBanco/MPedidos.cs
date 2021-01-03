@@ -32,11 +32,12 @@ namespace Repositorio.Migrations.XModeloBanco
                                             `DataPedido` datetime NOT NULL,
                                             `Orcamento` BIGINT DEFAULT NULL,
                                             `LancamentoCaixa` bit(1) NOT NULL,
+                                            `Status` varchar(300) COLLATE utf8_bin DEFAULT NULL,
                                             `Descricao` varchar(300) COLLATE utf8_bin DEFAULT NULL,
                                             `Quatidade` BIGINT DEFAULT NULL,
-                                            `TipoPagamento` varchar(50) DEFAULT NULL,
-                                            `QtdParcela` BIGINT DEFAULT NULL,
-                                            `PrecoTotal` double DEFAULT NULL,
+                                            `PrecoTotal` DECIMAL(12,2) DEFAULT NULL,
+                                            `Parcela` BiGINT DEFAULT NULL,
+                                            `ValorAntecipado` DECIMAL(12,2) DEFAULT NULL,
                                             PRIMARY KEY (`ChavePedido`))";
                         cmd.ExecuteNonQuery();
                         XLog.RegistraLog($"Tabela Pedidos.", "ModeloBanco");

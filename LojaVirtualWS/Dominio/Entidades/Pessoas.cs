@@ -8,15 +8,14 @@ using System.Text;
 namespace Dominio.Entidades
 {
     [Table("Pessoas")]
-    public class Pessoas
+    public partial class Pessoas
     {
-        //public Pessoa()
-        //{
-        //    Pedidos = new HashSet<Pedido>();
-        //}
 
         [Key]
         public Int64 ChavePessoa { get; set; }
+        [ForeignKey("ControleAcesso")]
+        public Int64 ChaveControleAcesso { get; set; }
+        public virtual ControleAcesso ControleAcesso { get; set; }
         [StringLength(100)]
         public string Nome { get; set; }
         [StringLength(100)]
@@ -34,10 +33,5 @@ namespace Dominio.Entidades
         [StringLength(1000)]
         public string Observacoes { get; set; }
         public bool Ativo { get; set; }
-
-        //[NotMapped]
-        //public ICollection<Pedidos> Pedido { get; set; }
-
-        //public virtual ICollection<Pedidos> Pedidos { get; set; }
     }
 }

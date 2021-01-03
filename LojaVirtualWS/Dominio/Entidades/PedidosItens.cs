@@ -4,11 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio.Entidades
 {
-    [Table("itenspedidos")]
-    public class ItemPedidos
+    [Table("pedidosItens")]
+    public class PedidosItens
     {
         [Key]
-        public Int64 ChaveItensPedido { get; set; }
+        public Int64 ChavePedidoItem { get; set; }
 
         [ForeignKey("Pedidos")]
         public Int64 ChavePedido { get; set; }

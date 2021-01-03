@@ -30,7 +30,7 @@ namespace Repositorio.Migrations.XModeloBanco
                                               `Nome` varchar(300) DEFAULT NULL,  
                                               `Descricao` varchar(300) DEFAULT NULL,
                                               `NomeImagem` varchar(300) DEFAULT NULL,
-                                              `Preco` double DEFAULT NULL,
+                                              `Preco` DECIMAL(12,2) DEFAULT NULL,
                                             PRIMARY KEY (`ChaveProduto`))";
                         cmd.ExecuteNonQuery();
                         XLog.RegistraLog($"Tabela Produtos.", "ModeloBanco");

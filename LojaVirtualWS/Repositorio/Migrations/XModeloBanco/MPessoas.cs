@@ -27,6 +27,7 @@ namespace Repositorio.Migrations.XModeloBanco
                     {
                         cmd.CommandText = @"CREATE TABLE `Pessoas` (
                                               `ChavePessoa` BIGINT NOT NULL AUTO_INCREMENT,
+                                              `ChaveControleAcesso` BIGINT DEFAULT NULL,
                                               `Nome` varchar(100) DEFAULT NULL,
                                               `Email` varchar(100) DEFAULT NULL,
                                               `Senha` varchar(100) DEFAULT NULL,
@@ -36,7 +37,7 @@ namespace Repositorio.Migrations.XModeloBanco
                                               `Cep` varchar(8) DEFAULT NULL,
                                               `Endereco` varchar(500) DEFAULT NULL,
                                               `Observacoes` varchar(1000) DEFAULT NULL,
-                                              `Ativo` bit(1) NOT NULL,
+                                              `Ativo` BOOLEAN DEFAULT NULL,
                                             PRIMARY KEY (`ChavePessoa`))";
                         cmd.ExecuteNonQuery();
                         XLog.RegistraLog($"Tabela Pessoas.", "ModeloBanco");

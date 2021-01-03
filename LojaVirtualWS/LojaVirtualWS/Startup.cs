@@ -48,6 +48,8 @@ namespace LojaVirtualWS
             services.AddScoped<IProdutosRepository, ProdutosRepository>();
             services.AddScoped<IPessoasRepository, PessoasRepository>();
             services.AddScoped<IPedidosRepository, PedidosRepository>();
+            services.AddScoped<IFinanceiroRepository, FinanceiroRepository>();
+            services.AddScoped<IFileToUploadRepository, FileToUploadRepository>();
 
 
             services.AddTransient<RodarMigration>();
@@ -112,7 +114,8 @@ namespace LojaVirtualWS
             var rodarMigration = serviceProv.GetService<RodarMigration>();
             rodarMigration.Executar();
 
-            //app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -33,6 +33,7 @@ namespace Repositorio.Repository
         public void Atualizar(TEntity entity)
         {
             Contexto.Set<TEntity>().Update(entity);
+            
             Contexto.SaveChanges();
         }
                 

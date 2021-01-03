@@ -9,6 +9,7 @@ namespace Dominio.Contratos
     {
         Pessoas Login(string pEmail, string pSenha);
         Pessoas VerificarUsuario(string pEmail);
-        Pessoas ObterChave(int pChave);
+        Pessoas ObterChave(Int64 pChave);
+        List<Pessoas> GetAllPessoas();
     }
 }

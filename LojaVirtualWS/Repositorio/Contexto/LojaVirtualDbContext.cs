@@ -12,9 +12,14 @@ namespace Repositorio.Contexto
         public DbSet<Pessoas> Pessoas { get; set; }
         public DbSet<Pedidos> Pedidos { get; set; }
         public DbSet<Produtos> Produtos { get; set; }
-        public DbSet<ItemPedidos> ItemPedidos { get; set; }
+        public DbSet<PedidosItens> PedidosItens { get; set; }
+        public DbSet<ControleAcesso> ControleAcesso { get; set; }
+        public DbSet<Caixa> Caixa { get; set; }
+        public DbSet<Banco> Banco { get; set; } 
+        public DbSet<CaixaMovimentacao> CaixaMovimentacao { get; set; }
         public DbSet<FormaPagamento> FormaPagamentos { get; set; }
         public DbSet<Versao_Migration> Versao_Migration { get; set; }
+        public DbSet<FileToUpload> FileToUpload { get; set; }
 
     }
 }

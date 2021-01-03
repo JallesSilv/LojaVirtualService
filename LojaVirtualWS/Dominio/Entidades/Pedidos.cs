@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Dominio.Entidades
 {
     [Table("Pedidos")]
-    public class Pedidos
+    public partial class Pedidos
     {
         [Key]
         public Int64 ChavePedido { get; set; }
@@ -26,11 +26,11 @@ namespace Dominio.Entidades
         public Int64 Orcamento { get; set; }
         public bool LancamentoCaixa { get; set; }
         public string Descricao { get; set; }
+        public string Status { get; set; }
         public Int64 Quatidade { get; set; }
-        public string TipoPagamento { get; set; }
         public Int64 Parcela { get; set; }
-        public double PrecoTotal { get; set; }
+        public decimal PrecoTotal { get; set; }
+        public decimal ValorAntecipado { get; set; }
 
-        public virtual ICollection<ItemPedidos> ItensPedido { get; set; }        
     }
 }

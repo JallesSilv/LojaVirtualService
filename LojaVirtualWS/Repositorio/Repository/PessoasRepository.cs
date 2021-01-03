@@ -1,5 +1,6 @@
 ﻿using Dominio.Contratos;
 using Dominio.Entidades;
+using Microsoft.EntityFrameworkCore;
 using Repositorio.Contexto;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace Repositorio.Repository
         {
             try
             {
-                return _contexto.Pessoas.FirstOrDefault(pX=> pX.Email == pEmail && pX.Senha == pSenha);
+                return _contexto.Pessoas.Include(pX => pX.ControleAcesso).FirstOrDefault(pX=> pX.Email == pEmail && pX.Senha == pSenha);
             }
             catch (Exception eX)
             {
@@ -33,7 +34,7 @@ namespace Repositorio.Repository
         {
             try
             {
-               return _contexto.Pessoas.FirstOrDefault(pX => pX.Email == pEmail);
+               return _contexto.Pessoas.Include(pX=>pX.ControleAcesso).FirstOrDefault(pX => pX.Email == pEmail);
             }
             catch (Exception eX)
             {
@@ -42,12 +43,26 @@ namespace Repositorio.Repository
             }
         }
 
-        public Pessoas ObterChave(int pChave)
+        public Pessoas ObterChave(Int64 pChave)
         {
             try
             {
-                var result = _contexto.Pessoas.Where(pX=>pX.ChavePessoa == pChave);
+                var result = _contexto.Pessoas.Include(pX => pX.ControleAcesso).Where(pX=>pX.ChavePessoa == pChave);
                 return result.FirstOrDefault();
+            }
+            catch (Exception error)
+            {
+
+                throw new Exception($@"{error.Message}");
+            }
+        }
+
+        public List<Pessoas> GetAllPessoas()
+        {
+            try
+            {
+                var result = _contexto.Pessoas.Include(pX=>pX.ControleAcesso).ToList();
+                return result;
             }
             catch (Exception error)
             {

@@ -7,10 +7,14 @@ using System.Text;
 namespace Dominio.Entidades
 {
     [Table("FormaPagamento")]
-    public class FormaPagamento
+    public partial class FormaPagamento
     {
         [Key]
         public Int64 ChaveFormaPagamento { get; set; }
-        public string Descricao { get; set; }        
+        public string Tipo { get; set; }    
+        public string Categoria { get; set; }    
+        public string Descricao { get; set; }    
+        public bool Ativo { get; set; }    
+        
     }
 }

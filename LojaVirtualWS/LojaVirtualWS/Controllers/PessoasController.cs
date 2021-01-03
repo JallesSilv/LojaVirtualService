@@ -34,12 +34,13 @@ namespace LojaVirtualWS.Controllers
         //[ApiVersion("1.0")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [HttpGet("Get")]
-        public ActionResult Get()
+        [HttpGet("GetAll")]
+        public ActionResult GetAll()
         {
             try
-            {                
-                return Ok(_contexto.ObterTodos());
+            {
+                var teste =_contexto.GetAllPessoas();
+                return Ok(teste);
                 //if (listaPessoas == null)
                 //{
                 //    return NotFound($@"Erro ao carregar: {listaPessoas} ");
@@ -128,16 +129,15 @@ namespace LojaVirtualWS.Controllers
         {
             try
             {
-                var usuarioAtivo = _contexto.VerificarUsuario(pessoa.Email);
+                var usuarioAtivo = _contexto.ObterChave(pessoa.ChavePessoa);
                 if (usuarioAtivo != null)
                 {
-                    pessoa.ChavePessoa = usuarioAtivo.ChavePessoa;
                     _contexto.Atualizar(pessoa);
                     return BadRequest("Usuário atualizado com sucesso!!");
                 }
                 else
-                {                    
-                    return Created("api/pessoas", pessoa);
+                {
+                    return BadRequest("Usuário não cadastrado!!");
                 }
             }
             catch (Exception ex)

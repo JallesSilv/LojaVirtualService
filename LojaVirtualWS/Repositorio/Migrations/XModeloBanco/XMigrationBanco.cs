@@ -12,8 +12,14 @@ namespace Repositorio.Migrations.XModeloBanco
             MPessoas.Pessoas();
             MProdutos.Produtos();
             MPedidos.Pedidos();
-            MItensPedidos.ItensPedidos();
+            MPedidosItens.PedidosItens();
             MFormaPagamento.FormaPagamento();
+            MCategoriaProduto.CategoriaProduto();
+            MCaixaMovimentacao.CaixaMovimentacao();
+            MBanco.Banco();
+            MFileToUpload.FileToUpload();
+            MCaixa.Caixa();
+            MControleAcesso.ControleAcesso();
         }
     }
 }
